@@ -1,12 +1,19 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { WithOutput } from './with-output';
+import { WithHostListener } from './with-host-listener';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [WithOutput, WithHostListener],
   templateUrl: './app.html',
-  styleUrl: './app.scss'
+  styleUrl: './app.scss',
 })
 export class App {
-  protected readonly title = signal('dom-test');
+  public show = signal<boolean>(false);
+
+  public toggle(): void {
+    this.show.set(!this.show());
+  }
+
+  public doSomething(): void {}
 }
